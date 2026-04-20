@@ -10,7 +10,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'No URL provided' }, { status: 400 });
   }
 
-  return new Promise((resolve) => {
+  return new Promise<NextResponse>((resolve) => {
     const scriptPath = path.join(process.cwd(), 'scripts', 'analyzer.py');
     exec(`python3 "${scriptPath}" "${url}"`, (error, stdout, stderr) => {
       if (error) {
