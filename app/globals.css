@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0B0F1A;
+  --color-surface: #111827;
+  --color-surface-2: #1F2937;
+  --color-border-custom: #1E293B;
+  --color-primary-custom: #3B82F6;
+  --color-gold-custom: #F59E0B;
+  --color-red-custom: #EF4444;
+  --color-green-custom: #10B981;
+  --color-text-1: #F9FAFB;
+  --color-text-2: #9CA3AF;
+  --color-text-3: #6B7280;
+  
+  --radius-custom: 12px;
+}
+
+@layer base {
+  :root {
+    --background: var(--color-bg);
+    --foreground: var(--color-text-1);
+  }
+
+  body {
+    @apply bg-bg text-text-1 antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-bg;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-surface-2 rounded-full;
+  }
+}
+
+.clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
