@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import Hls from 'hls.js';
+import Hls, { Level } from 'hls.js';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Play, Pause, Volume2, VolumeX, Settings, 
@@ -31,7 +31,7 @@ export default function VideoPlayer({ url, title }: VideoPlayerProps) {
   const [controlsLocked, setControlsLocked] = useState(false);
   
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
-  const [qualities, setQualities] = useState<typeof Hls.Level[]>([]);
+  const [qualities, setQualities] = useState<Level[]>([]);
   const [currentQuality, setCurrentQuality] = useState<number>(-1);
 
   const [showSettings, setShowSettings] = useState(false);
