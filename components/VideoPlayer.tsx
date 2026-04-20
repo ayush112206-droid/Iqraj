@@ -31,7 +31,7 @@ export default function VideoPlayer({ url, title }: VideoPlayerProps) {
   const [controlsLocked, setControlsLocked] = useState(false);
   
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
-  const [qualities, setQualities] = useState<Hls.Level[]>([]);
+  const [qualities, setQualities] = useState<typeof Hls.Level[]>([]);
   const [currentQuality, setCurrentQuality] = useState<number>(-1);
 
   const [showSettings, setShowSettings] = useState(false);
