@@ -2,15 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
-import SearchBar from '@/components/SearchBar';
 import BatchGrid from '@/components/BatchGrid';
 import BatchCardSkeleton from '@/components/BatchCardSkeleton';
 import { Batch } from '@/types';
+import SplashScreen from '@/components/SplashScreen';
+import WhatsAppModal from '@/components/WhatsAppModal';
 
 export default function HomePage() {
   const [batches, setBatches] = useState<Batch[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showSplash, setShowSplash] = useState(true);
+  const [showWhatsApp, setShowWhatsApp] = useState(false);
 
   useEffect(() => {
     async function loadBatches() {
@@ -27,10 +30,21 @@ export default function HomePage() {
     loadBatches();
   }, []);
 
+  if (showSplash) {
+    return <SplashScreen onComplete={() => { setShowSplash(false); setShowWhatsApp(true); }} />;
+  }
+
   return (
     <main className="min-h-screen bg-bg">
-      <Navbar batchCount={batches.length} />
+      <Navbar />
       
+      {showWhatsApp && (
+        <WhatsAppModal 
+          onClose={() => setShowWhatsApp(false)} 
+          showIcon={true}
+        />
+      )}
+
       <div className="max-w-7xl mx-auto py-12 px-4 space-y-12">
         {/* HERO */}
         <section className="text-center space-y-2 max-h-[160px] flex flex-col justify-center">
@@ -42,9 +56,6 @@ export default function HomePage() {
           </p>
         </section>
 
-        {/* SEARCH BAR */}
-        <SearchBar query={searchQuery} setQuery={setSearchQuery} />
-        
         {/* STATS ROW */}
         <div className="flex items-center gap-3 overflow-x-auto scrollbar-hide px-4 pb-2">
           <div className="flex-shrink-0 px-4 py-2 rounded-full border border-gold-custom/30 bg-gold-custom/5 text-xs font-bold text-gold-custom">
